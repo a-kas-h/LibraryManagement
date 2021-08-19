@@ -1,0 +1,101 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	 <!-- font awsm -->
+   <script src="https://kit.fontawesome.com/6eb560e7d2.js" crossorigin="anonymous"></script>
+   <!-- font awsm end -->
+	<title>users</title>
+</head>
+<body>
+ {% include 'header.html' %}
+    {% block content %}
+	
+    			  
+          </table>
+          <br>
+          <center><h1>book issue details</h1></center>
+          <table border="1"  style="width:99%;margin-left:7px;text-align:center;">
+            <tr style="border: 1px solid black;background-color:black;color:gray;">
+              <td><b>student name</b></td>
+            <td><b>book name</b></td>
+            <td><b>book issued up to</b></td>
+            <td><b>return date</b></td>
+            <td><b>return date update</b></td>
+            <td><b>fine amount</b></td>
+            <td></td>
+            </tr>
+            </tr>
+
+           {% for getdata in bdm %}
+           <tr>
+            <td>{{getdata.bookissueid}}</td>
+             <td>{{getdata.bookmasterid}}</td>
+              <td>{{getdata.issueuptodate}}</td>
+              <td>{{getdata.returndate}}</td>
+              <form method="POST" action="/bupdate/{{getdata.id}}" >
+                {% csrf_token %}
+              <td><input type="date" name="returndate" required style="outline: none;border: none;"></td>
+               <td>{{getdata.fineamt}}</td>
+               <td><input type="submit" name="update" value="Update" class="btn btn-success"></td>
+               </form>
+          </tr>
+          {% endfor %}
+          
+  </table>
+  
+          <br>
+  
+	
+{%endblock%}
+
+{% include 'footer.html' %}
+</body>
+</html>
+<!-- <script type="text/javascript">
+  function CallMe(){
+  var oneDayFine=5;
+  var dateVariable=document.getElementById('txtDueDate').value;
+  var dueDate=new Date("dateVariable");
+  var currentDate=new Date();//Get the current Date
+  var differenceinDays=Math.Abs(currentDate.getTime()-dueDate.getTime());
+  if(differenceinDays>0)
+  {
+  var totalFine=oneDayFine*differenceinDays;
+  document.getElementById('txtFine').value=totalFine;
+  }
+  else
+  {
+  window.alert('No Fine');
+  }
+  }
+  </script> -->
+  <!-- <table border="1"  style="width:99%;margin-left:7px;text-align:center;">
+    				<tr style="border: 1px solid black;background-color:black;color:gray;">
+    					<th style="color: white;">issued book list</th>
+    					<th></th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+    					<th>
+                      <a href="/bookissuemaster.html"><button>Add</button></a>
+                    </th>
+                    <th></th>
+                    <tr>
+                    <td><b>student name</b></td>
+                    <td><b>total book issued</b></td>
+                    <td><b>date</b></td>
+                    <td></td>
+                    </tr>
+                    </tr>
+
+                   {% for getdata in pdm %}
+                   <tr>
+                     <td>{{getdata.smid}}</td>
+                      <td>{{getdata.totalnobook}}</td>
+                       <td>{{getdata.datetime}}</td>
+                       <td></td>
+                  </tr>
+                  {% endfor %} -->

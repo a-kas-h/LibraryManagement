@@ -1,0 +1,40 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>report</title>
+</head>
+<body>
+  {% include 'header.html' %}
+   <center>
+    <h2><hr>report deatils</h2>
+   <br>
+   <form method="POST">
+   {%csrf_token%}
+    From:<input type="date" name="fromdate" required>
+    To:<input type="date" name="todate" required>
+       <input type="submit" name="search" value="search">
+    <hr>
+   <div class="container-fluid"><div class="row"><div class="col-md-12">
+   <table class="table table-bordered" >
+    <tr style="background-color: gray;">
+         <th style="text-align: center;">student</th>
+      <th style="text-align: center;">book name</th>
+      
+      <th style="text-align: center;">date</th>
+    </tr>
+    {% for result in data %}
+    <tr style="text-align: center;">
+      <td>{{result.bookissueid}}</td> 
+      <td>{{result.bookmasterid}}</td>
+      <td>{{result.issueuptodate}}</td>
+    </tr>
+      {%endfor%}
+  </table></div></div></div>
+  
+   </form>
+   </center>
+   {% include 'footer.html' %}
+</body>
+</html>

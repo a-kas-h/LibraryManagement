@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <!-- font awsm -->
+   <script src="https://kit.fontawesome.com/6eb560e7d2.js" crossorigin="anonymous"></script>
+   <!-- font awsm end -->
+	<title>student</title>
+</head>
+<body>
+{% include 'header.html' %}
+{%block content%}
+ 
+    <div class="container" style="position:center;"><div class="row"><div class="col-md-12">
+        <center>
+     <form method="POST">
+     {% csrf_token %}
+    <table border="1" style="width: 600px;">
+      <tr style="color:gray;background-color:black;"><th></th>
+        <th >student details</th>
+        </th>
+          </tr>
+          <tr>
+            <th>name:</th> <td><input type="text" placeholder="enter student" name="name" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Father name:</th><td><input type="text" placeholder="enter Father name" name="fname" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Mother name:</th><td><input type="text" placeholder="enter Mother name" name="mname" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Mobile No:</th><td><input type="text" placeholder="enter mobile" name="mobileno" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Email:</th><td><input type="email" placeholder="enter email" name="email" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Age:</th><td><input type="number" placeholder="enter Age" name="age" required></td></tr>
+          </tr>
+           <tr><th style="padding-left:40%;"><input type="submit" name="save" value="Add"></th></tr>
+       </table>
+         {% if messages %}
+      {% for message in messages%}
+      <h2 style="color:green;">{{message}}</h2>
+{% endfor %}
+{% endif %}
+                    
+    </form>   
+    </center>
+    </div></div>
+    <div class="row">
+<div class="col-md-12"><br>
+    <table class="table table-bordered" id="item_table">
+        <tr>
+          <th>student name</th>
+          <th>Roll no</th>
+          <th>Father name</th>
+          <th>Mother name</th>
+          <th>Mobile No</th>
+          <th>Email</th>
+          <th>Age</th>
+        </tr>
+       {% for x in show %}
+       <tr>
+          <td>{{x.name}}</td>
+          <td>{{x.id}}</td>
+          <td>{{x.fname}}</td>
+          <td>{{x.mname}}</td>
+          <td>{{x.email}}</td>
+          <td>{{x.age}}</td>
+         <td><a href="/deletestd/{{x.id}}" class="btn btn-danger btn sm">Delete</a></td>
+       </tr>
+       {% endfor %}
+        <tr>
+        <td></td>
+         <td></td>
+        <!-- <td>SUB TOTAL</td>
+        <td><input style="background-color:#ffffff;border:none;" type="text" id="grdtot" class="grdtot" value="0" name="subtotalamt" readonly/></td>
+        </tr> -->
+      </table>
+</div>
+
+
+
+</div></div>
+
+    {%endblock%}
+</body>
+</html>

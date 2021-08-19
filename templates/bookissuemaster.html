@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>book issue</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+  {% include 'header.html' %}
+  <div class="container"><div class="row"><div class="col-md-12">
+  <div style="height:550px;">
+  {% comment %} {% if messages %}
+      {% for message in messages%}
+      <h2 style="color:rgb(79, 172, 94);">{{message}}</h2>
+{% endfor %}
+{% endif %} {% endcomment %}
+                <div class="container">
+   <h4 align="center">enter book details</h4>
+   <br />
+    <div class="table-repsonsive">
+     <span id="error"></span>
+     <form method="POST" id="insert_form">
+      {% csrf_token %}
+     <table class="table table-bordered" id="item_table">
+      <tr>
+                 <th>book name</th>
+                 <th>Issued up todate</th>
+      </tr>
+      <tr>
+  <td><select name="bookmasterid" class="form-control book_name" required><option value="">Select item</option>{% for getdata in show %}<option value="{{getdata.bookname}}">{{getdata.bookname}}</option>{% endfor %}</select></td>
+  <td><input type="date" name="issueuptodate"></td>
+  <td> <input  type="submit" name="button1" class="btn btn-info" value="add" /></td>
+  </tr>
+  </table>
+</form>
+</div>
+</div>
+<br>
+<form method="POST" action="{%  url 'addbookissuedata' %}">
+
+  {% csrf_token %}
+     <div style="padding-left:40%;">
+    <b>student name</b>
+         <select name="name" required><option value="">Select contact</option>{% for getdata in SDetails %}<option value="{{getdata.name}}">{{getdata.name}}</option>{% endfor %}</select>
+      </div>
+    <br>
+    <table class="table table-bordered" id="item_table">
+     <tr>
+    <th>book name</th>
+    <th>Issue up todate</th>
+    <th></th>
+    </tr>
+    {% for x in bdet %}
+    <tr>
+        <td><input type="text" name="bookname"  value="{{x.bookname}}" class="form-control itemid" readonly></td>
+        <td><input type="text" name="issueuptodate"   value="{{x.issueuptodate}}" class="form-control pqty" readonly></td>
+        <td><a href="/deletebook/{{x.id}}" class="btn btn-danger btn sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+      <tr>
+  
+    <td> TOTAL BOOK</td>
+    {%for c in i%}
+    <td><input style="background-color:#ffffff;border:none;" type="text"  value="{{c}}" name="totalbook" readonly/></td>
+    {%endfor%}
+    </tr> 
+    <tfoot>
+     <tr>
+         <td></td>
+        <td><input type="submit" value="save"></td>
+        <td></td>
+        <td></td>
+        </tr>
+    </tfoot>
+    </table>
+    </div>
+    </div></div></div>
+    </form>
+{% include 'footer.html' %}
+</body>
+</html>

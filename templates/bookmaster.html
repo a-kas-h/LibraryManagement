@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <!-- font awsm -->
+   <script src="https://kit.fontawesome.com/6eb560e7d2.js" crossorigin="anonymous"></script>
+   <!-- font awsm end -->
+	<title>student</title>
+</head>
+<body>
+{% include 'header.html' %}
+{%block content%}
+ 
+    <div class="container" style="position:center;"><div class="row"><div class="col-md-12">
+        <center>
+     <form method="POST">
+     {% csrf_token %}
+    <table border="1" style="width: 600px;">
+      <tr style="color:gray;background-color:black;"><th></th>
+        <th >student details</th>
+        </th>
+          </tr>
+          <tr>
+            <th>Bookname:</th> <td><input type="text" placeholder="enter book" name="bookname" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Publication:</th><td><input type="text" placeholder="enter Publication" name="publication" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Serialno:</th><td><input type="number" placeholder="enter Serialno" name="serialno" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Edition:</th><td><input type="text" placeholder="enter edition" name="edition" required></td></tr>
+            <tr><th><hr></th><td><hr></td></tr>
+            <tr><th>Fine Amount:</th><td><input type="text" placeholder="enter fine amount" name="fineamt" required></td></tr>
+          </tr>
+           <tr><th style="padding-left:40%;"><input type="submit" name="save" value="Add"></th></tr>
+       </table>
+         {% if messages %}
+      {% for message in messages%}
+      <h2 style="color:green;">{{message}}</h2>
+{% endfor %}
+{% endif %}
+                    
+    </form>   
+    </center>
+    </div></div>
+    <div class="row">
+<div class="col-md-12"><br>
+    <table class="table table-bordered" id="item_table">
+        <tr>
+          <th>bookname</th>
+          <th>publication</th>
+          <th>serialno</th>
+          <th>edition</th>
+          <th>fineamt</th>
+          <th></th>
+        </tr>
+       {% for x in show %}
+       <tr>
+          <td>{{x.bookname}}</td>
+          <td>{{x.publication}}</td>
+          <td>{{x.serialno}}</td>
+          <td>{{x.edition}}</td>
+          <td>{{x.fineamt}}</td>
+         <td><a href="/deleteb/{{x.id}}" class="btn btn-danger btn sm">Delete</a></td>
+       </tr>
+       {% endfor %}
+        <tr>
+        <td></td>
+         <td></td>
+        <!-- <td>SUB TOTAL</td>
+        <td><input style="background-color:#ffffff;border:none;" type="text" id="grdtot" class="grdtot" value="0" name="subtotalamt" readonly/></td>
+        </tr> -->
+      </table>
+</div>
+
+
+
+</div></div>
+
+    {%endblock%}
+</body>
+</html>
